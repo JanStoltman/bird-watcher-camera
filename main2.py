@@ -35,7 +35,7 @@ while True:
         # Measure pixels differences between current and
         # previous frame
         mse = np.square(np.subtract(cur, prev)).mean()
-        if mse > 8:
+        if mse > 6:
             if not encoding:
                 encoder.output = FileOutput(f"rec/{int(time.time())}.h264")
                 picam2.start_encoder(encoder, quality = Quality.VERY_HIGH)
@@ -43,7 +43,7 @@ while True:
                 print("New Motion", mse)
             ltime = time.time()
         else:
-            if encoding and time.time() - ltime > 2.0:
+            if encoding and time.time() - ltime > 5.0:
                 picam2.stop_encoder()
                 encoding = False
                 print("Stopped encoding")
