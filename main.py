@@ -16,16 +16,19 @@ def convert_to_mp4(h_filename):
     mp_filename = h_filename.replace(".h264", ".mp4")
     subprocess.run([f"MP4Box", "-add", h_filename, mp_filename])
     os.remove(h_filename)
+    print(f"Converted to mp4 {mp_filename}\n")
 
 
-def pre_start_cleanup():
+def cleanup():
     print("Cleaning up previous recordings")
     if os.path.exists("rec/"):
         shutil.rmtree("rec/")
     os.makedirs("rec/")
+    print("Cleanup done\n")
 
 
 if __name__ == '__main__':
+    cleanup()
     lsize = (320, 240)
     picam2 = Picamera2()
     video_config = picam2.create_video_configuration(
