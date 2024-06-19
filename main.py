@@ -14,7 +14,7 @@ from picamera2.outputs import FileOutput
 def convert_to_mp4(h_filename):
     print(f"Converting to mp4 {h_filename}")
     mp_filename = h_filename.replace(".h264", ".mp4")
-    subprocess.run(f"MP4Box -add {h_filename} {mp_filename}")
+    subprocess.run([f"MP4Box", "-add", h_filename, mp_filename])
     os.remove(h_filename)
 
 
